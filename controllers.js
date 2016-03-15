@@ -24,7 +24,7 @@
       this.tasks = [{"Brush Your Teeth": true}, {"Tie Shoes": false}];
 
       this.add = function(){
-        // this.tasks.push($scope.task)
+        this.tasks.push($scope.task)
       }
     }
 
