@@ -13,15 +13,17 @@
       <button ng-click="counterController.sub()"> - </button>
       <span ng-bind="counterController.counter"></span>
     </div>
+  </br></br>
+
 
     <div ng-controller= "todoController as todoController">
-      <input ng-model="task"></input>
+      <input ng-model="todoController.newTask"></input>
       <button ng-click= "todoController.add()"> Add Task </button>
-      <span ng-bind-template= "{{counter}} / {{max}}"></span>
-      <h2> List </h2>
+      <span ng-bind-template= "{{todoController.complete}} / {{todoController.total}} complete"></span>
+      <h2> Your Task List </h2>
 
-      <ul ng-repeat="task in tasks">
-        <li> {{todoController.tasks}} </li>
+      <ul ng-repeat="task in todoController.tasks">
+        <li ng-bind-template= "{{task.name}}">  </li>
       </ul>
     </div>
 

@@ -21,11 +21,23 @@
     };
 
     function todoController(){
-      this.tasks = [{"Brush Your Teeth": true}, {"Tie Shoes": false}];
+      this.tasks = [{name: "Brush Your Teeth", complete: true}, {name: "Tie Shoes", complete: false}];
 
+      // this.completed = this.tasks.reduce(function(counter,task){
+      //     return counter++ if (task.complete === true)
+      //   };
+
+      this.total = this.tasks.length;
       this.add = function(){
-        this.tasks.push($scope.task)
+        console.log(todoController.newTask)
+        this.tasks.push({name: todoController.newTask, complete: false})
+      }.bind(this)
+
+      this.complete = function(taskName){
+        tasks[taskName] = true
+        // var task = this.tasks.find( task[taskName] != undefined)
       }
+
     }
 
 })(window.angular);
