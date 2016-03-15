@@ -19,11 +19,11 @@
     <div ng-controller= "todoController as todoController">
       <input ng-model="todoController.newTask"></input>
       <button ng-click= "todoController.add()"> Add Task </button>
-      <span ng-bind-template= "{{todoController.complete}} / {{todoController.total}} complete"></span>
+      <span ng-bind-template= "{{todoController.completed}} / {{todoController.total}} complete"></span>
       <h2> Your Task List </h2>
 
       <ul ng-repeat="task in todoController.tasks">
-        <li ng-bind-template= "{{task.name}}">  </li>
+        <li ng-click="todoController.complete($index)" ng-bind-template= "{{task.name}}">  </li>
       </ul>
     </div>
 

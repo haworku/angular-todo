@@ -22,20 +22,23 @@
 
     function todoController(){
       this.tasks = [{name: "Brush Your Teeth", complete: true}, {name: "Tie Shoes", complete: false}];
-
-      // this.completed = this.tasks.reduce(function(counter,task){
-      //     return counter++ if (task.complete === true)
-      //   };
-
+      this.newTask = '';
+      this.completed = 1;
       this.total = this.tasks.length;
+
       this.add = function(){
-        console.log(todoController.newTask)
-        this.tasks.push({name: todoController.newTask, complete: false})
+        console.log(this.newTask)
+        this.tasks.push({name: this.newTask, complete: false});
       }.bind(this)
 
-      this.complete = function(taskName){
-        tasks[taskName] = true
-        // var task = this.tasks.find( task[taskName] != undefined)
+      this.complete = function(taskIndex){
+        console.log(taskIndex);
+        this.tasks[taskIndex].complete = true;
+
+         this.completed = this.tasks.reduce(function(p, n){
+          return n.complete === true ? p + 1 : p;
+        }, 0);
+
       }
 
     }
