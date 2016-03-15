@@ -5,7 +5,26 @@
     <title>Angular TODO</title>
   </head>
 
-  <body>
+  <body ng-app="app">
+
+    <h1> Angular Todo </h1>
+    <div ng-controller="counterController as counterController">
+    <button ng-click="counterController.add()"> + </button>
+     <button ng-click="counterController.sub()"> - </button>
+    <span ng-bind="counterController.counter"></span>
+
+
+    <input ng-model="task"></input>
+    <button ng-click= "todoController.add()"> Add Task </button>
+    <span ng-bind-template= "{{counter}} / {{max}}"></span>
+    <h2> List </h2>
+
+    <ul ng-repeat="task in tasks>
+      <li> {{task}} </li>
+    </ul>
+
     <script src="./bower_components/angular/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers.js"></script>
   </body>
 </html>

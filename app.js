@@ -1,7 +1,8 @@
-'use strict';
+(function (angular){
+  'use strict';
+ angular.module('app', [
+  ]);
 
-var todoApp = angular.module('todoApp', [
-]);
 
+})(window.angular);
 
-var todoController = angular.module('todoController', []);
