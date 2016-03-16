@@ -1,4 +1,4 @@
-(function() {
+(function(angular) {
   'use strict';
 
   // angular service that's going to hold our `Todo` Service with no dependency
