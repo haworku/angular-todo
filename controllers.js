@@ -34,11 +34,13 @@
 
       this.add = function(){
         // Add new task
-        console.log(this.newTask)
-        this.tasks.push({name: this.newTask, complete: false});
-        this.newTask = '';
 
-        this. updateFraction();
+        if (this.newTask.length > 0) {
+          this.tasks.push({name: this.newTask, complete: false});
+          this.newTask = '';
+
+          this. updateFraction();
+        };
       }.bind(this)
 
       this.toggleComplete = function(taskIndex){
