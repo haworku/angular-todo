@@ -40,6 +40,12 @@
       this.complete = function(taskIndex){
         console.log(taskIndex);
         this.tasks[taskIndex].complete = true;
+      this.toggleComplete = function(taskIndex){
+        // Toggle 'complete' property in data structure
+        var current = this.tasks[taskIndex].complete;
+        this.tasks[taskIndex].complete = !current
+        this.updateFraction();
+      }.bind(this)
 
          this.completed = this.tasks.reduce(function(p, n){
           return n.complete === true ? p + 1 : p;
