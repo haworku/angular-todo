@@ -26,6 +26,7 @@
       <ul ng-repeat="task in todoController.tasks">
         <li ng-class= "{'strikethrough': task.complete }"ng-click="todoController.complete($index)" ng-bind-template= "{{task.name}}">  </li>
       </ul>
+        <button ng-click= "todoController.add()"> Show Completed </button>
     </div>
 
     <script src="./bower_components/angular/angular.min.js"></script>
