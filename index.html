@@ -27,6 +27,7 @@
       <ul ng-repeat="task in todoController.tasks">
           <li ng-hide="!todoController.showCompleted && task.complete === true" ng-class= "{'strikethrough': task.complete }"ng-click="todoController.toggleComplete($index)" ng-bind-template= "{{task.name}}">  </li>
       </ul>
+        <button ng-click= "todoController.toggleShowCompleted()" ng-bind= "todoController.toggleText"></button>
     </div>
 
     <script src="./bower_components/angular/angular.min.js"></script>

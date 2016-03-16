@@ -22,26 +22,25 @@
     };
 
     function todoController(){
+      // Seed
       this.tasks = [{name: "Brush Your Teeth", complete: true}, {name: "Tie Shoes", complete: false}];
-      this.newTask = '';
-      this.toggleText = 'Hide Completed';
       this.completed = 1;
-      this.total = this.tasks.length;
-      this.showCompleted = true;
+      this.total = 2;
 
+      // Defaults
+      this.newTask = '';
+      this.showCompleted = true;
+      this.toggleText = 'Hide Completed';
 
       this.add = function(){
+        // Add new task
         console.log(this.newTask)
         this.tasks.push({name: this.newTask, complete: false});
         this.newTask = '';
-        this.total = this.tasks.length;
 
         this. updateFraction();
       }.bind(this)
 
-      this.complete = function(taskIndex){
-        console.log(taskIndex);
-        this.tasks[taskIndex].complete = true;
       this.toggleComplete = function(taskIndex){
         // Toggle 'complete' property in data structure
         var current = this.tasks[taskIndex].complete;
@@ -58,7 +57,8 @@
         this.total = this.tasks.length;
       }
 
-      this.toggleCompleted= function(){
+      this.toggleShowCompleted= function(){
+        // Toggle visbility of completed tasks
         this.showCompleted = !this.showCompleted
         this.toggleText = this.showCompleted ? "Hide Completed" : "Show Completed";
         };
