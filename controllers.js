@@ -5,6 +5,7 @@
     .controller('counterController', counterController)
     .controller('todoController', todoController)
 
+
     counterController.$inject = []
     todoController.$inject = []
 
@@ -29,12 +30,14 @@
       this.add = function(){
         console.log(this.newTask)
         this.tasks.push({name: this.newTask, complete: false});
+
+        this.total = this.tasks.length;
       }.bind(this)
 
       this.complete = function(taskIndex){
         console.log(taskIndex);
         this.tasks[taskIndex].complete = true;
-
+        this.
          this.completed = this.tasks.reduce(function(p, n){
           return n.complete === true ? p + 1 : p;
         }, 0);
