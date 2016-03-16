@@ -6,7 +6,7 @@
 
   angular
     .module('TodoService')
-    .factory('Todo', Todo); // Telling Angular we're going to be have a service called factory
+    .factory('Todo', Todo); // Telling Angular we're going to be have a service called `Todo`
 
   /**
    * JS TIP
