@@ -35,6 +35,8 @@
         this.tasks.push({name: this.newTask, complete: false});
         this.newTask = '';
         this.total = this.tasks.length;
+
+        this. updateFraction();
       }.bind(this)
 
       this.complete = function(taskIndex){
@@ -47,9 +49,13 @@
         this.updateFraction();
       }.bind(this)
 
+      this.updateFraction = function(){
+         // Display updated completed/total fraction
          this.completed = this.tasks.reduce(function(p, n){
           return n.complete === true ? p + 1 : p;
         }, 0);
+
+        this.total = this.tasks.length;
       }
 
       this.toggleCompleted= function(){
