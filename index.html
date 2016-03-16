@@ -24,7 +24,7 @@
       <h2> Your Task List </h2>
 
       <ul ng-repeat="task in todoController.tasks">
-        <li ng-click="todoController.complete($index)" ng-bind-template= "{{task.name}}">  </li>
+        <li ng-class= "{'strikethrough': task.complete }"ng-click="todoController.complete($index)" ng-bind-template= "{{task.name}}">  </li>
       </ul>
     </div>
 

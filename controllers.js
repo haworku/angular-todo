@@ -42,6 +42,10 @@
           return n.complete === true ? p + 1 : p;
         }, 0);
 
+        this.removeCompleted= function(){
+
+        };
+
       }
 
     }
