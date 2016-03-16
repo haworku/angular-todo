@@ -6,18 +6,19 @@
     .controller('todoController', todoController)
 
 
-    counterController.$inject = []
+    counterController.$inject = ['$scope']
     todoController.$inject = []
 
-    function counterController(){
-      this.counter = 0;
+    function counterController($scope){
+      $scope.counter = 0;
+      console.log($scope)
 
-      this.add = function() {
-       this.counter >= 10 ? this.counter : this.counter ++;
+      $scope.add = function() {
+       $scope.counter >= 10 ? $scope.counter : $scope.counter ++;
       }
 
-      this.sub = function(){
-        this.counter === 0 ? this.counter : this.counter --;
+      $scope.sub = function(){
+        $scope.counter === 0 ? $scope.counter : $scope.counter --;
       }
     };
 
