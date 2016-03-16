@@ -19,14 +19,15 @@
 
     <div ng-controller= "todoController as todoController">
       <input ng-model="todoController.newTask"></input>
-      <button ng-click= "todoController.add()"> Add Task </button>
+          <button ng-click= "todoController.add()"> Add Task </button>
       <span ng-bind-template= "{{todoController.completed}} / {{todoController.total}} complete"></span>
+
       <h2> Your Task List </h2>
 
       <ul ng-repeat="task in todoController.tasks">
-        <li ng-class= "{'strikethrough': task.complete }"ng-click="todoController.complete($index)" ng-bind-template= "{{task.name}}">  </li>
+          <li ng-hide="!todoController.showCompleted && task.complete === true" ng-class= "{'strikethrough': task.complete }"ng-click="todoController.complete($index)" ng-bind-template= "{{task.name}}">  </li>
       </ul>
-        <button ng-click= "todoController.add()"> Show Completed </button>
+        <button ng-click= "todoController.toggleCompleted()" ng-bind= "todoController.toggleText"></button>
     </div>
 
     <script src="./bower_components/angular/angular.min.js"></script>
