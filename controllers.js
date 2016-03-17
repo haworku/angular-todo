@@ -7,7 +7,7 @@
 
 
     counterController.$inject = ['$scope']
-    todoController.$inject = []
+    todoController.$inject = ['$log', '$filter', '$timeout']
 
     function counterController($scope){
       $scope.counter = 0;
@@ -22,7 +22,8 @@
       }
     };
 
-    function todoController(){
+    function todoController($log, $filter, $timeout){
+      console.log($filter)
       // Seed
       this.tasks = [{name: "Brush Your Teeth", complete: true}, {name: "Tie Shoes", complete: false}];
       this.completed = 1;
@@ -32,15 +33,19 @@
       this.newTask = '';
       this.showCompleted = true;
       this.toggleText = 'Hide Completed';
+      this.submitted = false
 
       this.add = function(){
         // Add new task
+        this.submitted = true
 
         if (this.newTask.length > 0) {
-          this.tasks.push({name: this.newTask, complete: false});
-          this.newTask = '';
-
-          this. updateFraction();
+          $timeout(function(){
+              this.tasks.push({name: this.newTask, complete: false});
+              this.newTask = '';
+              this.submitted = false;
+              this. updateFraction();
+          }.bind(this), 500);
         };
       }.bind(this)
 
