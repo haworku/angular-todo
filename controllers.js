@@ -7,7 +7,7 @@
 
 
     counterController.$inject = ['$scope']
-    todoController.$inject = []
+    todoController.$inject = ['$log', '$filter']
 
     function counterController($scope){
       $scope.counter = 0;
@@ -22,7 +22,8 @@
       }
     };
 
-    function todoController(){
+    function todoController($log, $filter){
+      console.log($filter)
       // Seed
       this.tasks = [{name: "Brush Your Teeth", complete: true}, {name: "Tie Shoes", complete: false}];
       this.completed = 1;
