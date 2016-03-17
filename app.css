@@ -6,3 +6,8 @@ li{
   padding: .2em;
 
 }
+
+.newtask li{
+  color: red;
+  font-style: italic;
+}
