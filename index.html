@@ -9,10 +9,10 @@
   <body ng-app="app">
 
     <h1> Angular Todo </h1>
-    <div ng-controller="counterController as counterController">
-      <button ng-click="counterController.add()"> + </button>
-      <button ng-click="counterController.sub()"> - </button>
-      <span ng-bind="counterController.counter"></span>
+    <div ng-controller="counterController">
+      <button ng-click="add()"> + </button>
+      <button ng-click="sub()"> - </button>
+      <span ng-bind="counter"></span>
     </div>
   </br></br>
 
@@ -26,6 +26,9 @@
 
       <ul ng-repeat="task in todoController.tasks">
           <li ng-hide="!todoController.showCompleted && task.complete === true" ng-class= "{'strikethrough': task.complete }"ng-click="todoController.toggleComplete($index)" ng-bind-template= "{{task.name}}">  </li>
+      </ul>
+      <ul class= "newtask" ng-class="{'submitted': todoController.submitted == true}">
+        <li> {{todoController.newTask}}</li>
       </ul>
         <button ng-click= "todoController.toggleShowCompleted()" ng-bind= "todoController.toggleText"></button>
     </div>

@@ -6,22 +6,24 @@
     .controller('todoController', todoController)
 
 
-    counterController.$inject = []
-    todoController.$inject = []
+    counterController.$inject = ['$scope']
+    todoController.$inject = ['$log', '$filter', '$timeout']
 
-    function counterController(){
-      this.counter = 0;
+    function counterController($scope){
+      $scope.counter = 0;
+      console.log($scope)
 
-      this.add = function() {
-       this.counter >= 10 ? this.counter : this.counter ++;
+      $scope.add = function() {
+       $scope.counter >= 10 ? $scope.counter : $scope.counter ++;
       }
 
-      this.sub = function(){
-        this.counter === 0 ? this.counter : this.counter --;
+      $scope.sub = function(){
+        $scope.counter === 0 ? $scope.counter : $scope.counter --;
       }
     };
 
-    function todoController(){
+    function todoController($log, $filter, $timeout){
+      console.log($filter)
       // Seed
       this.tasks = [{name: "Brush Your Teeth", complete: true}, {name: "Tie Shoes", complete: false}];
       this.completed = 1;
@@ -31,15 +33,19 @@
       this.newTask = '';
       this.showCompleted = true;
       this.toggleText = 'Hide Completed';
+      this.submitted = false
 
       this.add = function(){
         // Add new task
+        this.submitted = true
 
         if (this.newTask.length > 0) {
-          this.tasks.push({name: this.newTask, complete: false});
-          this.newTask = '';
-
-          this. updateFraction();
+          $timeout(function(){
+              this.tasks.push({name: this.newTask, complete: false});
+              this.newTask = '';
+              this.submitted = false;
+              this. updateFraction();
+          }.bind(this), 500);
         };
       }.bind(this)
 
