@@ -4,11 +4,7 @@
 
   angular.module('app', [
   ]);
+ // no idea what goes here
 
-  .filter('strikethrough', function() {
-  return function(input) {
-    return input ? '\u2713' : '\u2718';
-  };
-});
 
 })(window.angular)
