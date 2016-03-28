@@ -18,9 +18,9 @@
 
 
     <div ng-controller= "todoController as todoController">
-      <input ng-model="todoController.newTask"></input>
-          <button ng-click= "todoController.add()"> Add Task </button>
-      <span ng-bind-template= "{{todoController.completed}} / {{todoController.total}} complete"></span>
+      <input ng-model="something"></input>
+          <button ng-click= "todoController.vm.add(something)"> Add Task </button>
+      <span ng-bind-template= "7 / {{vm.todoList.length}} complete"></span>
 
       <h2> Your Task List </h2>
 

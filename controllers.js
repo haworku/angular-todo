@@ -27,32 +27,29 @@
     function todoController($log, $filter, $timeout, Todo){
        var vm = this;
        vm.todoList = Todo.get();
-       vm.
 
-      // Seed
-      this.tasks = [{name: "Brush Your Teeth", complete: true}, {name: "Tie Shoes", complete: false}];
-      this.completed = 1;
-      this.total = 2;
 
-      // Defaults
-      this.newTask = '';
-      this.showCompleted = true;
-      this.toggleText = 'Hide Completed';
-      this.submitted = false
-
-      this.add = function(chore){
+      vm.add = function(chore){
         // Add new task
+        console.log("we in dis")
         this.todoList = Todo.add();
         // don't allow to add if its less than one chracter
         // update the fraction
       }.bind(this)
 
-      this.toggleComplete = function(taskIndex){
-        // Toggle 'complete' property in data structure
-        var current = this.tasks[taskIndex].complete;
-        this.tasks[taskIndex].complete = !current
-        this.updateFraction();
-      }.bind(this)
+    vm.update = function(index, updatedTask){
+      this.todoList = Todo.update();
+    };
+
+    vm.remove = function(index){
+      this.todoList = Todo.remove(index);
+    };
+      // this.toggleComplete = function(taskIndex){
+      //   // Toggle 'complete' property in data structure
+      //   var current = this.tasks[taskIndex].complete;
+      //   this.tasks[taskIndex].complete = !current
+      //   this.updateFraction();
+      // }.bind(this)
 
       this.updateFraction = function(){
          // Display updated completed/total fraction
