@@ -2,12 +2,16 @@
   'use strict';
 
   angular.module('app')
+  angular.module('app', ['TodoService'])
+
+
     .controller('counterController', counterController)
     .controller('todoController', todoController)
 
 
     counterController.$inject = ['$scope']
     todoController.$inject = ['$log', '$filter', '$timeout']
+    todoController.$inject = ['$log', '$filter', '$timeout', 'Todo']
 
     function counterController($scope){
       $scope.counter = 0;
@@ -24,6 +28,11 @@
 
     function todoController($log, $filter, $timeout){
       console.log($filter)
+    function todoController($log, $filter, $timeout, Todo){
+       var vm = this;
+       vm.todoList = Todo.get();
+       vm.
+
       // Seed
       this.tasks = [{name: "Brush Your Teeth", complete: true}, {name: "Tie Shoes", complete: false}];
       this.completed = 1;
