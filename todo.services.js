@@ -63,9 +63,15 @@
        */
       update(index, updatedTask) {
         // this is the equivalent of ECMAScript 6's Object.assign
-        angular.extend(TodoList[i], updatedTask);
+        angular.extend(TodoList[index], updatedTask);
 
         return Object.assign( [],TodoList );
+      },
+         // Toggle 'complete' property in data structure
+      complete(index){
+         var completeBool = !TodoList[index].completed;
+         TodoList[index].completed = completeBool
+          return Object.assign( [],TodoList );
       },
 
       /**

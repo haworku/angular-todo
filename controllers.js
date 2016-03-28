@@ -31,34 +31,31 @@
 
       vm.add = function(chore){
         // Add new task
-        console.log("we in dis")
-        this.todoList = Todo.add();
+        vm.todoList = Todo.add(chore);
+        // STILL TO DO
         // don't allow to add if its less than one chracter
         // update the fraction
-      }.bind(this)
+      };
 
     vm.update = function(index, updatedTask){
-      this.todoList = Todo.update();
+     vm.todoList  = Todo.update(index, updatedTask);
     };
 
     vm.remove = function(index){
-      this.todoList = Todo.remove(index);
+     vm.todoList  = Todo.remove(index);
     };
-      // this.toggleComplete = function(taskIndex){
-      //   // Toggle 'complete' property in data structure
-      //   var current = this.tasks[taskIndex].complete;
-      //   this.tasks[taskIndex].complete = !current
-      //   this.updateFraction();
-      // }.bind(this)
 
-      this.updateFraction = function(){
+    vm.toggleComplete= function(index){
+       vm.todoList  = Todo.complete(index);
+        };
+
+      this.numberCompleted = function(){
          // Display updated completed/total fraction
-         this.completed = this.tasks.reduce(function(p, n){
-          return n.complete === true ? p + 1 : p;
+         return vm.todoList.reduce(function(p, n){
+          return n.completed === true ? p + 1 : p;
         }, 0);
 
-        this.total = this.tasks.length;
-      }
+      };
 
       this.toggleShowCompleted= function(){
         // Toggle visbility of completed tasks
