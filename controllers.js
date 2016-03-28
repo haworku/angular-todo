@@ -1,7 +1,6 @@
 (function (angular){
   'use strict';
 
-  angular.module('app')
   angular.module('app', ['TodoService'])
 
 
@@ -10,7 +9,6 @@
 
 
     counterController.$inject = ['$scope']
-    todoController.$inject = ['$log', '$filter', '$timeout']
     todoController.$inject = ['$log', '$filter', '$timeout', 'Todo']
 
     function counterController($scope){
@@ -26,8 +24,6 @@
       }
     };
 
-    function todoController($log, $filter, $timeout){
-      console.log($filter)
     function todoController($log, $filter, $timeout, Todo){
        var vm = this;
        vm.todoList = Todo.get();
@@ -44,18 +40,11 @@
       this.toggleText = 'Hide Completed';
       this.submitted = false
 
-      this.add = function(){
+      this.add = function(chore){
         // Add new task
-        this.submitted = true
-
-        if (this.newTask.length > 0) {
-          $timeout(function(){
-              this.tasks.push({name: this.newTask, complete: false});
-              this.newTask = '';
-              this.submitted = false;
-              this. updateFraction();
-          }.bind(this), 500);
-        };
+        this.todoList = Todo.add();
+        // don't allow to add if its less than one chracter
+        // update the fraction
       }.bind(this)
 
       this.toggleComplete = function(taskIndex){
