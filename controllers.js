@@ -14,10 +14,7 @@
 
 
       vm.add = function(chore){
-
         vm.todoList = Todo.add(chore);
-        // don't allow to add if its less than one chracter
-
       };
 
     vm.update = function(index, updatedTask){

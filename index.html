@@ -11,9 +11,11 @@
   <h1> Angular Todo </h1>
 
   <div ng-controller= "todoController as todo">
-    <input ng-model="something"></input>
-    <button ng-click= "todo.add(something)"> Add Task </button>
-
+    <form name="newTask" ng-submit="todo.add(chore)" >
+    <input type="text" name="inputz" ng-model="chore" ng-required="true" ng-minlength="4" ></input>
+      <span class="error" ng-hide="newTask.$error.minlength">New task must be at least four characters long.</span>
+      <input type="submit" value="Add Chore" ng-disabled="newTask.$invalid || !newTask.$dirty"/>
+    </form>
     <span ng-bind-template= "{{todo.numberCompleted() || 0}} / {{todo.todoList.length || 0}} complete"></span>
 
     <h2> Your Task List </h2>
