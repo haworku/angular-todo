@@ -14,11 +14,10 @@
 
 
       vm.add = function(chore){
-        // Add new task
+
         vm.todoList = Todo.add(chore);
-        // STILL TO DO
         // don't allow to add if its less than one chracter
-        // update the fraction
+
       };
 
     vm.update = function(index, updatedTask){
@@ -34,14 +33,13 @@
         };
 
     vm.numberCompleted = function(){
-         // Display updated completed/total fraction
          return vm.todoList.reduce(function(p, n){
           return n.completed === true ? p + 1 : p;
         }, 0);
 
       };
 
-      this.toggleShowCompleted= function(){
+      vm.toggleShowCompleted= function(){
         // Toggle visbility of completed tasks
         this.toggleText = this.showCompleted ? "Hide Completed" : "Show Completed";
         };
