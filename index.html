@@ -12,22 +12,23 @@
 
   <div ng-controller= "todoController as todo">
     <form name="newTask" ng-submit="todo.add(chore)" >
-    <input type="text" name="inputz" ng-model="chore" ng-required="true" ng-minlength="4" ></input>
-      <span class="error" ng-hide="newTask.$error.minlength">New task must be at least four characters long.</span>
-      <input type="submit" value="Add Chore" ng-disabled="newTask.$invalid || !newTask.$dirty"/>
+      <input type="text" name="inputz" ng-model="chore" ng-required="true" ng-minlength="4" ></input>
+      <span class="error" ng-hide="!newTask.inputz.$error.minlength || !newTask.inputz.$dirty ">New task must be at least four characters long.</span>
+      <input type="submit" value="Add Chore" ng-disabled="newTask.$invalid"/>
     </form>
     <span ng-bind-template= "{{todo.numberCompleted() || 0}} / {{todo.todoList.length || 0}} complete"></span>
 
     <h2> Your Task List </h2>
 
     <ul ng-repeat="task in todo.todoList">
-      <li  ng-class= "{'strikethrough': task.completed == true}" ng-click="todo.toggleComplete($index)" ng-bind-template= "{{task.chore}}">  </li>
-    </ul>
-  </div>
+     <li  ng-hide= "todo.showEdit === false" ng-class= "{'strikethrough': task.completed == true}" ng-click="todo.toggleComplete($index)" ng-dblclick= "{{todo.showEdit = true}}" ng-bind-template= "{{task.chore}}">  </li>
+     <input ng-if="todo.showEdit" ng-model= "editedChore" ng-dblclick= "todo.update($index, editedChore)" value ="{{task.chore}}"> </input> 
+   </ul>
+</div>
 
-  <script src="./bower_components/angular/angular.min.js"></script>
-  <script src="./app.js"></script>
-  <script src="./todo.services.js"></script>
-  <script src="./controllers.js"></script>
+<script src="./bower_components/angular/angular.min.js"></script>
+<script src="./app.js"></script>
+<script src="./todo.services.js"></script>
+<script src="./controllers.js"></script>
 </body>
 </html>
