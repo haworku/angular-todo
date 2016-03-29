@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-  <title>Angular TODO</title>
-  <link rel="stylesheet" href="app.css">
-</head>
+  <head>
+    <title>Angular TODO</title>
+    <link rel="stylesheet" href="app.css">
+  </head>
 
-<body ng-app="app">
+  <body ng-app="app">
+    <h1> Angular Todo </h1>
 
-  <h1> Angular Todo </h1>
+    <div ng-controller= "todoController as todo">
+      <form name="newTask" ng-submit="todo.add(todo.chore)" >
+        <input type="text"
+               name="inputz"
+               ng-model="todo.chore"
+               ng-required="true"
+               ng-minlength="4" />
 
-  <div ng-controller= "todoController as todo">
-    <form name="newTask" ng-submit="todo.add(chore)" >
-      <input type="text" name="inputz" ng-model="chore" ng-required="true" ng-minlength="4" ></input>
-      <span class="error" ng-hide="!newTask.inputz.$error.minlength || !newTask.inputz.$dirty ">New task must be at least four characters long.</span>
-      <input type="submit" value="Add Chore" ng-disabled="newTask.$invalid"/>
-    </form>
-    <span ng-bind-template= "{{todo.numberCompleted() || 0}} / {{todo.todoList.length || 0}} complete"></span>
+        <input type="submit"
+               value="Add Chore"
+               ng-disabled="newTask.$invalid" />
 
-    <h2> Your Task List </h2>
+        <p class="error"
+          ng-hide="!newTask.inputz.$error.minlength || !newTask.inputz.$dirty">New task must be at least four characters long.</p>
+      </form>
 
-    <ul ng-repeat="task in todo.todoList">
-     <li  ng-hide= "todo.showEdit === false" ng-class= "{'strikethrough': task.completed == true}" ng-click="todo.toggleComplete($index)" ng-dblclick= "{{todo.showEdit = true}}" ng-bind-template= "{{task.chore}}">  </li>
-     <input ng-if="todo.showEdit" ng-model= "editedChore" ng-dblclick= "todo.update($index, editedChore)" value ="{{task.chore}}"> </input> 
-   </ul>
-</div>
+      <span ng-bind-template= "{{todo.numberCompleted || 0}} / {{todo.todoList.length || 0}} complete"></span>
 
-<script src="./bower_components/angular/angular.min.js"></script>
-<script src="./app.js"></script>
-<script src="./todo.services.js"></script>
-<script src="./controllers.js"></script>
-</body>
+      <h2>Your Task List </h2>
+
+      <ul ng-repeat="task in todo.todoList">
+        <li ng-show="!task.edit"
+            ng-class="{'strikethrough': task.completed == true, 'red': task.edit === true}"
+            ng-click="todo.toggleComplete($index)"
+            ng-dblclick="todo.toogleEdit($index)"
+            ng-bind="task.chore"></li>
+
+        <input ng-show="task.edit === true"
+               type="text"
+               ng-model="task.chore"
+               ng-dblclick="todo.toogleEdit($index);" />
+      </ul>
+    </div>
+
+    <script src="./bower_components/angular/angular.min.js"></script>
+    <script src="./app.js"></script>
+    <script src="./todo.services.js"></script>
+    <script src="./controllers.js"></script>
+  </body>
 </html>

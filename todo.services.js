@@ -40,30 +40,27 @@
       add(task) {
         TodoList.push({
           completed: false,
+          edit: false,
           chore: task
         });
 
-        return Object.assign( [],TodoList );
+        $rootScope.$emit(EVENT_NAME);
+        return Object.assign([],TodoList );
       },
 
       /**
        * given an index and an updated instance it'll update a chore
        *
        * @param  {Number} index
+       * @param {Object} updatedTask
        * @return {Object} updatedTask
        */
        update(index, updatedTask) {
         // this is the equivalent of ECMAScript 6's Object.assign
         angular.extend(TodoList[index], updatedTask);
-
+        $rootScope.$emit(EVENT_NAME);
         return Object.assign( [],TodoList );
       },
-         // Toggle 'complete' property in data structure
-         complete(index){
-           var completeBool = !TodoList[index].completed;
-           TodoList[index].completed = completeBool
-           return Object.assign( [],TodoList );
-         },
 
       /**
        * removes a chore at specified index
@@ -73,8 +70,18 @@
        */
        remove(index) {
         TodoList.splice(index, 1);
-
+        $rootScope.$emit(EVENT_NAME);
         return Object.assign( [],TodoList );
+      },
+
+      /**
+       * returns complete count
+       * @return {Number}
+       */
+      completed() {
+        return TodoList.reduce(function(p, n) {
+          return n.completed === true ? p + 1 : p;
+        }, 0);
       },
 
       /**
