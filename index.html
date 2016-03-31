@@ -3,38 +3,49 @@
 <html>
   <head>
     <title>Angular TODO</title>
-      <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="app.css">
   </head>
 
   <body ng-app="app">
-
     <h1> Angular Todo </h1>
-    <div ng-controller="counterController">
-      <button ng-click="add()"> + </button>
-      <button ng-click="sub()"> - </button>
-      <span ng-bind="counter"></span>
-    </div>
-  </br></br>
 
+    <div ng-controller= "todoController as todo">
+      <form name="newTask" ng-submit="todo.add(todo.chore)" >
+        <input type="text"
+               name="inputz"
+               ng-model="todo.chore"
+               ng-required="true"
+               ng-minlength="4" />
 
-    <div ng-controller= "todoController as todoController">
-      <input ng-model="todoController.newTask"></input>
-          <button ng-click= "todoController.add()"> Add Task </button>
-      <span ng-bind-template= "{{todoController.completed}} / {{todoController.total}} complete"></span>
+        <input type="submit"
+               value="Add Chore"
+               ng-disabled="newTask.$invalid" />
 
-      <h2> Your Task List </h2>
+        <p class="error"
+          ng-hide="!newTask.inputz.$error.minlength || !newTask.inputz.$dirty">New task must be at least four characters long.</p>
+      </form>
 
-      <ul ng-repeat="task in todoController.tasks">
-          <li ng-hide="!todoController.showCompleted && task.complete === true" ng-class= "{'strikethrough': task.complete }"ng-click="todoController.toggleComplete($index)" ng-bind-template= "{{task.name}}">  </li>
+      <span ng-bind-template= "{{todo.numberCompleted || 0}} / {{todo.todoList.length || 0}} complete"></span>
+
+      <h2>Your Task List </h2>
+
+      <ul ng-repeat="task in todo.todoList">
+        <li ng-show="!task.edit"
+            ng-class="{'strikethrough': task.completed == true, 'red': task.edit === true}"
+            ng-click="todo.toggleComplete($index)"
+            ng-dblclick="todo.toogleEdit($index)"
+            ng-bind="task.chore"></li>
+
+        <input ng-show="task.edit === true"
+               type="text"
+               ng-model="task.chore"
+               ng-dblclick="todo.toogleEdit($index);" />
       </ul>
-      <ul class= "newtask" ng-class="{'submitted': todoController.submitted == true}">
-        <li> {{todoController.newTask}}</li>
-      </ul>
-        <button ng-click= "todoController.toggleShowCompleted()" ng-bind= "todoController.toggleText"></button>
     </div>
 
     <script src="./bower_components/angular/angular.min.js"></script>
-    <script src="app.js"></script>
-    <script src="controllers.js"></script>
+    <script src="./app.js"></script>
+    <script src="./todo.services.js"></script>
+    <script src="./controllers.js"></script>
   </body>
 </html>

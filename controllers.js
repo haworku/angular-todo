@@ -1,76 +1,42 @@
 (function (angular){
-  'use strict';
+    'use strict';
+    angular.module('app', ['TodoService'])
 
-  angular.module('app')
-    .controller('counterController', counterController)
-    .controller('todoController', todoController)
+    .controller('todoController', todoController);
+
+    todoController.$inject = ['$log', '$scope', '$filter', '$timeout', 'Todo'];
 
 
-    counterController.$inject = ['$scope']
-    todoController.$inject = ['$log', '$filter', '$timeout']
+    function todoController($log, $scope, $filter, $timeout, Todo){
+      var vm = this;
+      vm.chore = 'typing';
+      vm.editChore = '';
+      vm.todoList = Todo.get();
+      vm.numberCompleted = Todo.completed();
 
-    function counterController($scope){
-      $scope.counter = 0;
-      console.log($scope)
+      Todo.subscribe($scope, function() {
+        vm.numberCompleted = Todo.completed();
+      });
 
-      $scope.add = function() {
-       $scope.counter >= 10 ? $scope.counter : $scope.counter ++;
-      }
+      vm.add = function (chore) {
+        vm.todoList = Todo.add(vm.chore);
+        vm.chore = '';
+      };
 
-      $scope.sub = function(){
-        $scope.counter === 0 ? $scope.counter : $scope.counter --;
-      }
-    };
+      vm.update = function (index, updatedTask) {
+        vm.todoList = Todo.update(index, updatedTask);
+      };
 
-    function todoController($log, $filter, $timeout){
-      console.log($filter)
-      // Seed
-      this.tasks = [{name: "Brush Your Teeth", complete: true}, {name: "Tie Shoes", complete: false}];
-      this.completed = 1;
-      this.total = 2;
+      vm.remove = function (index) {
+        vm.todoList = Todo.remove(index);
+      };
 
-      // Defaults
-      this.newTask = '';
-      this.showCompleted = true;
-      this.toggleText = 'Hide Completed';
-      this.submitted = false
+      vm.toogleEdit = function(index) {
+        vm.todoList = Todo.update(index, {edit: !vm.todoList[index].edit});
+      };
 
-      this.add = function(){
-        // Add new task
-        this.submitted = true
-
-        if (this.newTask.length > 0) {
-          $timeout(function(){
-              this.tasks.push({name: this.newTask, complete: false});
-              this.newTask = '';
-              this.submitted = false;
-              this. updateFraction();
-          }.bind(this), 500);
-        };
-      }.bind(this)
-
-      this.toggleComplete = function(taskIndex){
-        // Toggle 'complete' property in data structure
-        var current = this.tasks[taskIndex].complete;
-        this.tasks[taskIndex].complete = !current
-        this.updateFraction();
-      }.bind(this)
-
-      this.updateFraction = function(){
-         // Display updated completed/total fraction
-         this.completed = this.tasks.reduce(function(p, n){
-          return n.complete === true ? p + 1 : p;
-        }, 0);
-
-        this.total = this.tasks.length;
-      }
-
-      this.toggleShowCompleted= function(){
-        // Toggle visbility of completed tasks
-        this.showCompleted = !this.showCompleted
-        this.toggleText = this.showCompleted ? "Hide Completed" : "Show Completed";
-        };
-
+      vm.toggleComplete = function (index) {
+        vm.todoList = Todo.update(index, {completed: !vm.todoList[index].completed});
+      };
     }
-
 })(window.angular);

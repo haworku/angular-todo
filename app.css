@@ -4,17 +4,4 @@
 
 li{
   padding: .2em;
-
-}
-
-.newtask li{
-  color: red;
-  font-style: italic;
-}
-
-.submitted li{
-  color: green;
-  font-style: bold;
-  font-size: 3em;
-  list-style-type: none;
 }
